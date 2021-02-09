@@ -25,28 +25,30 @@ namespace API.Controller
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public List<Users> Get()
+        [Route("[action]")]
+        public IActionResult Get()
         {
-            return _userService.GetAllUsers();
-        }
-        /// <summary>
-        /// Get All User2
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("GetList")]
-        public List<Users> GetWithRoute()
-        {
-            return _userService.GetAllUsers();
-        }
+            var users = _userService.GetAllUsers();
+            return Ok(users); //200 + data 
+        }        
         /// <summary>
         /// Get By Id User
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
-        public Users Get(int id)
+        [HttpGet()]
+        [Route("[action]/{id}")]
+        public IActionResult GetById(int id)
         {
-            return _userService.GetUserById(id);
+            var user = _userService.GetUserById(id);
+            if (user != null)
+            {
+                return Ok(user); // 200+ data 
+            }
+            else
+            {
+                return NotFound(); // 404 Not Found 
+            }            
         }
         /// <summary>
         /// Add the User
@@ -54,9 +56,11 @@ namespace API.Controller
         /// <param name="user"></param>
         /// <returns></returns>
         [HttpPost]
-        public Users UserAdd([FromBody]Users user)
-        {
-            return _userService.CreateUser(user);
+        [Route("[action]")]
+        public IActionResult UserAdd([FromBody]Users user)
+        {               
+                var AddUser = _userService.CreateUser(user);
+                return RedirectToAction("Get", AddUser.Id);
         }
         /// <summary>
         /// Update the User
@@ -64,18 +68,30 @@ namespace API.Controller
         /// <param name="user"></param>
         /// <returns></returns>
         [HttpPut]
-        public Users UserUpdate([FromBody]Users user)
+        [Route("[action]")]
+        public IActionResult UserUpdate([FromBody]Users user)
         {
-            return _userService.Update(user);
+            if (_userService.GetUserById(user.Id)!=null)
+            {
+                var UpdateUser = _userService.Update(user);
+                return Ok(UpdateUser);
+            }
+            return NotFound();
         }
         /// <summary>
         /// Delete the User
         /// </summary>
         /// <param name="id"></param>
-        [HttpDelete("{id}")]
-        public void UserDelete(int id)
+        [HttpDelete]
+        [Route("[action]/{id}")]
+        public IActionResult UserDelete(int id)
         {
-            _userService.Delete(id);
+            if (_userService.GetUserById(id)!=null)
+            {
+                _userService.Delete(id);
+                return Ok();
+            }
+            return NotFound();
         }
 
     }

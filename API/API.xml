@@ -10,13 +10,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:API.Controller.UsersController.GetWithRoute">
-            <summary>
-            Get All User2
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:API.Controller.UsersController.Get(System.Int32)">
+        <member name="M:API.Controller.UsersController.GetById(System.Int32)">
             <summary>
             Get By Id User
             </summary>
