@@ -23,6 +23,20 @@ namespace API
             services.AddControllers();
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSwaggerDocument(config=>
+            {
+                config.PostProcess = (doc =>
+                  {
+                      doc.Info.Title = "API Test";
+                      doc.Info.Contact = new NSwag.OpenApiContact()
+                      {
+                          Name = "Yaþar Samet Alýç", //Information
+                          Url = "http://yasarsamet.xyz/",
+                          Email = "samet@oceannet.com.tr"
+                      };
+                  });
+            });//swagger
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,8 +47,9 @@ namespace API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
-
+            app.UseRouting();            
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers(); 

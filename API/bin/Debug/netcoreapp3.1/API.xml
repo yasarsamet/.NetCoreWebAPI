@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API</name>
+    </assembly>
+    <members>
+        <member name="M:API.Controller.UsersController.Get">
+            <summary>
+            Get All User
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controller.UsersController.GetWithRoute">
+            <summary>
+            Get All User2
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controller.UsersController.Get(System.Int32)">
+            <summary>
+            Get By Id User
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controller.UsersController.UserAdd(Entities.Users)">
+            <summary>
+            Add the User
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controller.UsersController.UserUpdate(Entities.Users)">
+            <summary>
+            Update the User
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controller.UsersController.UserDelete(System.Int32)">
+            <summary>
+            Delete the User
+            </summary>
+            <param name="id"></param>
+        </member>
+    </members>
+</doc>
